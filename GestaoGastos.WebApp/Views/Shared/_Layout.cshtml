@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>FinanSync - Controle de Gastos</title>
+
+   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+   <style>
+      :root {
+         --primary: #4f46e5;
+         --primary-dark: #4338ca;
+         --bg: #f3f4f6;
+         --card-bg: #ffffff;
+         --text-dark: #1f2937;
+         --text-light: #6b7280;
+      }
+
+      body {
+         margin: 0;
+         background: var(--bg);
+         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .overlay {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background: rgba(0,0,0,0.45);
+         display: none;
+         z-index: 900;
+      }
+
+         .overlay.active {
+            display: block;
+         }
+
+      .sidebar {
+         width: 240px;
+         height: 100vh;
+         position: fixed;
+         left: 0;
+         top: 0;
+         background: var(--primary);
+         color: white;
+         padding: 25px 0;
+         flex-direction: column;
+         box-shadow: 2px 0 8px rgba(0,0,0,0.25);
+         transition: transform 0.3s ease;
+         transform: translateX(0);
+         z-index: 1000;
+      }
+
+      @@media (max-width: 900px) {
+         .sidebar {
+            transform: translateX(-100%);
+         }
+
+            .sidebar.active {
+               transform: translateX(0);
+            }
+      }
+
+      .close-btn {
+         font-size: 1.8rem;
+         background: none;
+         border: none;
+         color: white;
+         cursor: pointer;
+         position: absolute;
+         right: 15px;
+         top: 10px;
+         display: none;
+      }
+
+      .sidebar h3 {
+         text-align: center;
+         margin-bottom: 40px;
+         font-size: 1.4rem;
+         font-weight: bold;
+      }
+
+      .menu a {
+         color: white;
+         padding: 12px 25px;
+         text-decoration: none;
+         display: block;
+         font-size: 1rem;
+         transition: 0.25s;
+      }
+
+         .menu a:hover {
+            background: var(--primary-dark);
+         }
+
+      .topbar {
+         height: 60px;
+         background: var(--card-bg);
+         display: flex;
+         align-items: center;
+         padding: 0 20px;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+         justify-content: space-between;
+         margin-left: 240px;
+      }
+
+      .menu-btn {
+         background: none;
+         border: none;
+         font-size: 1.8rem;
+         cursor: pointer;
+         color: var(--text-dark);
+         display: none;
+      }
+
+      .topbar .username {
+         font-weight: 500;
+         color: var(--text-dark);
+      }
+
+      .content {
+         margin-left: 240px;
+         margin-top: 70px;
+         padding: 25px;
+      }
+
+      footer {
+         margin-left: 240px;
+         text-align: center;
+         padding: 20px;
+         color: var(--text-light);
+         font-size: 0.9rem;
+      }
+
+      @@media (max-width: 900px) {
+         .menu-btn {
+            display: block;
+         }
+
+         .close-btn {
+            display: block;
+         }
+
+         .topbar {
+            margin-left: 0;
+         }
+
+         .content {
+            margin-left: 0;
+         }
+
+         footer {
+            margin-left: 0;
+         }
+      }
+   </style>
+</head>
+
+<body>
+
+   <div class="overlay" id="overlay"></div>
+
+   <div class="sidebar" id="sidebar">
+      <button class="close-btn" id="closeSidebar">×</button>
+
+      <h3>💰 FinanSync</h3>
+
+      <div class="menu">
+         <a asp-controller="Dashboard" asp-action="Index">📊 Dashboard</a>
+         <a asp-controller="Transacao" asp-action="Index">💵 Transações</a>
+         <a asp-controller="Categoria" asp-action="Index">🏷️ Categorias</a>
+         <a asp-controller="Meta" asp-action="Index">🎯 Metas</a>
+         <a asp-controller="Relatorio" asp-action="Index">📄 Relatórios</a>
+         <a asp-controller="Usuario" asp-action="Perfil">👤 Perfil</a>
+         <a asp-controller="Usuario" asp-action="Logout">🚪 Sair</a>
+      </div>
+   </div>
+
+   <div class="topbar">
+      <button class="menu-btn" id="openSidebar">☰</button>
+      <span class="username">Olá, @User.Identity?.Name</span>
+   </div>
+
+   <div class="content">
+      @RenderBody()
+   </div>
+
+   <footer>
+      &copy; @DateTime.Now.Year - Sistema de Controle de Gastos
+   </footer>
+
+   <script>
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      const openBtn = document.getElementById("openSidebar");
+      const closeBtn = document.getElementById("closeSidebar");
+
+      function openMenu() {
+         sidebar.classList.add("active");
+         overlay.classList.add("active");
+      }
+
+      function closeMenu() {
+         sidebar.classList.remove("active");
+         overlay.classList.remove("active");
+      }
+
+      openBtn.onclick = openMenu;
+      closeBtn.onclick = closeMenu;
+      overlay.onclick = closeMenu;
+   </script>
+
+   <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+   @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,387 @@
+﻿@{
+   Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>FinanSync - Controle Financeiro</title>
+
+   <style>
+      :root {
+         --primary: #4f46e5;
+         --secondary: #4338ca;
+         --text-dark: #1f2937;
+         --text-light: #6b7280;
+         --bg-light: #f9fafb;
+      }
+
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         font-family: "Segoe UI", Tahoma, sans-serif;
+      }
+
+      body {
+         background: var(--bg-light);
+      }
+
+      header {
+         width: 100%;
+         padding: 20px 40px;
+         background: #fff;
+         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+         position: sticky;
+         top: 0;
+         z-index: 100;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+      }
+
+         header h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: bold;
+         }
+
+      nav {
+         display: flex;
+         gap: 20px;
+         align-items: center;
+      }
+
+         nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: 0.3s;
+         }
+
+            nav a:hover {
+               color: var(--primary);
+            }
+
+      .btn-primary {
+         background: var(--primary);
+         padding: 10px 20px;
+         border-radius: 8px;
+         color: #fff;
+         text-decoration: none;
+      }
+
+         .btn-primary:hover {
+            background: var(--secondary);
+         }
+
+      .menu-btn {
+         display: none;
+         font-size: 30px;
+         cursor: pointer;
+         color: var(--primary);
+      }
+
+      .mobile-menu {
+         position: fixed;
+         top: 0;
+         right: 0;
+         width: 75%;
+         height: 100%;
+         background: #fff;
+         box-shadow: -3px 0 8px rgba(0,0,0,0.15);
+         transform: translateX(100%);
+         transition: 0.35s ease;
+         padding: 30px;
+         z-index: 999;
+      }
+
+         .mobile-menu.active {
+            transform: translateX(0);
+         }
+
+         .mobile-menu a {
+            display: block;
+            margin-bottom: 18px;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+         }
+
+      .close-menu {
+         font-size: 26px;
+         background: none;
+         border: none;
+         color: var(--primary);
+         font-weight: bold;
+         cursor: pointer;
+         margin-top: 20px;
+      }
+
+      .hero {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding: 60px 40px;
+         flex-wrap: wrap;
+      }
+
+      .hero-text {
+         max-width: 550px;
+      }
+
+         .hero-text h2 {
+            font-size: 2.6rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+         }
+
+         .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+         }
+
+      .hero img {
+         width: 100%;
+         max-width: 450px;
+      }
+
+      footer {
+         background: #fff;
+         padding: 25px;
+         text-align: center;
+         color: var(--text-light);
+         font-size: 0.9rem;
+         margin-top: 40px;
+      }
+
+      @@media (max-width: 900px) and (min-width: 601px) {
+
+         header {
+            flex-direction: column;
+            gap: 15px;
+         }
+
+         nav {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+         }
+
+            nav a, nav .btn-primary {
+               font-size: 1.05rem;
+            }
+         .menu-btn {
+            display: none;
+         }
+      }
+
+      @@media (max-width: 600px) {
+         nav {
+            display: none;
+         }
+         .menu-btn {
+            display: block;
+         }
+
+         header {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
+         }
+      }
+
+   </style>
+</head>
+
+<body>
+
+   <header>
+      <h1>FinanSync</h1>
+
+      <span class="menu-btn" onclick="openMenu()">☰</span>
+
+      <nav>
+         <a href="#sobre">Sobre</a>
+         <a href="#recursos">Recursos</a>
+         <a href="#contato">Contato</a>
+         <a asp-controller="Usuario" asp-action="Login" class="btn-primary">Entrar</a>
+         <a asp-controller="Usuario" asp-action="Registrar" class="btn-primary" style="background: var(--secondary)">Registrar</a>
+      </nav>
+   </header>
+
+   <div class="mobile-menu" id="mobileMenu">
+      <button class="close-menu" onclick="closeMenu()">×</button>
+      <a href="#sobre">Sobre</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#contato">Contato</a>
+      <a asp-controller="Usuario" asp-action="Login" class="btn-primary">Entrar</a>
+      <a asp-controller="Usuario" asp-action="Registrar" class="btn-primary" style="background: var(--secondary)">Registrar</a>
+   </div>
+
+   <section class="hero">
+      <div class="hero-text">
+         <h2>Gerencie seus gastos de forma simples, rápida e inteligente.</h2>
+         <p>Organize suas finanças, acompanhe despesas e tenha controle total do seu dinheiro.</p>
+         <a asp-controller="Usuario" asp-action="Registrar" class="btn-primary">Começar agora</a>
+      </div>
+      <img src="" alt="Imagem do sistema">
+   </section>
+
+   <section id="sobre" style="padding:60px 40px; max-width:950px; margin:auto;">
+      <h2 style="font-size:2.2rem; color:#1f2937; margin-bottom:20px;">Sobre o FinanSync</h2>
+      <p style="font-size:1.1rem; color:#6b7280; line-height:1.7;">
+         O FinanSync foi desenvolvido para simplificar sua vida financeira.
+         Ele permite organizar gastos, controlar receitas, planejar metas e
+         visualizar relatórios completos para uma tomada de decisão inteligente.
+         Nosso objetivo é oferecer uma plataforma moderna, simples e poderosa para
+         que qualquer pessoa tenha controle total do seu dinheiro.
+      </p>
+   </section>
+
+   <section id="recursos" style="padding:60px 40px; background:#fff;">
+      <h2 style="text-align:center; font-size:2.2rem; color:#1f2937; margin-bottom:40px;">
+         Recursos do Sistema
+      </h2>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:30px; max-width:1200px; margin:auto;">
+
+         <div style="background:#f9fafb; padding:25px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05);">
+            <h3 style="color:#4f46e5; margin-bottom:10px;">📊 Dashboard Inteligente</h3>
+            <p style="color:#6b7280;">Visualize seus gastos, receitas, metas e saldo em tempo real em um painel moderno e responsivo.</p>
+         </div>
+
+         <div style="background:#f9fafb; padding:25px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05);">
+            <h3 style="color:#4f46e5; margin-bottom:10px;">💳 Controle de Gastos</h3>
+            <p style="color:#6b7280;">Cadastre despesas, categorizadas automaticamente com relatórios detalhados.</p>
+         </div>
+
+         <div style="background:#f9fafb; padding:25px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05);">
+            <h3 style="color:#4f46e5; margin-bottom:10px;">💰 Planejamento Financeiro</h3>
+            <p style="color:#6b7280;">Crie metas mensais, acompanhe o progresso e receba alertas inteligentes.</p>
+         </div>
+
+         <div style="background:#f9fafb; padding:25px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05);">
+            <h3 style="color:#4f46e5; margin-bottom:10px;">📁 Relatórios Exportáveis</h3>
+            <p style="color:#6b7280;">Exporte relatórios em PDF, Excel e CSV com um clique.</p>
+         </div>
+
+         <div style="background:#f9fafb; padding:25px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05);">
+            <h3 style="color:#4f46e5; margin-bottom:10px;">📱 Aplicação Responsiva</h3>
+            <p style="color:#6b7280;">Use o sistema no celular, tablet ou computador com alta performance.</p>
+         </div>
+
+         <div style="background:#f9fafb; padding:25px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05);">
+            <h3 style="color:#4f46e5; margin-bottom:10px;">🔐 Segurança Avançada</h3>
+            <p style="color:#6b7280;">Autenticação forte, criptografia e backups automáticos.</p>
+         </div>
+
+      </div>
+   </section>
+
+
+   <section style="padding:60px 40px;">
+      <h2 style="text-align:center; font-size:2.2rem; color:#1f2937; margin-bottom:40px;">Planos Disponíveis</h2>
+
+      <div style="display:flex; gap:30px; flex-wrap:wrap; justify-content:center;">
+
+         <div style="background:#fff; padding:25px; width:290px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+            <h3 style="color:#4f46e5;">Básico</h3>
+            <p style="color:#6b7280;">Ideal para quem está começando.</p>
+            <h4 style="font-size:1.8rem; margin:15px 0;">R$ 0 / mês</h4>
+            <ul style="color:#6b7280; line-height:1.8;">
+               <li>✔ Controle básico de gastos</li>
+               <li>✔ Relatórios simples</li>
+               <li>✔ 1 usuário</li>
+            </ul>
+            <a asp-controller="Usuario" asp-action="Registrar" class="btn-primary" style="display:block; margin-top:20px; text-align:center;">Começar</a>
+         </div>
+
+         <div style="background:#fff; padding:25px; width:290px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+            <h3 style="color:#4f46e5;">Pro</h3>
+            <p style="color:#6b7280;">Para quem quer controle completo.</p>
+            <h4 style="font-size:1.8rem; margin:15px 0;">R$ 24,90 / mês</h4>
+            <ul style="color:#6b7280; line-height:1.8;">
+               <li>✔ Tudo do plano básico</li>
+               <li>✔ Dashboard completo</li>
+               <li>✔ Metas financeiras</li>
+               <li>✔ Relatórios exportáveis</li>
+            </ul>
+            <a asp-controller="Usuario" asp-action="Registrar" class="btn-primary" style="display:block; margin-top:20px; text-align:center;">Assinar Pro</a>
+         </div>
+
+      </div>
+   </section>
+
+
+   <section style="padding:60px 40px; background:#fff;">
+      <h2 style="text-align:center; font-size:2.2rem; margin-bottom:40px; color:#1f2937;">Depoimentos</h2>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:25px; max-width:950px; margin:auto;">
+
+         <div style="background:#f9fafb; padding:20px; border-radius:10px;">
+            <p style="color:#6b7280;">“Finalmente consigo organizar minhas contas sem dor de cabeça. O FinanSync mudou meu mês!”</p>
+            <strong style="color:#4f46e5; display:block; margin-top:10px;">— João Martins</strong>
+         </div>
+
+         <div style="background:#f9fafb; padding:20px; border-radius:10px;">
+            <p style="color:#6b7280;">“A parte de relatórios é perfeita para minhas anotações e planejamento.”</p>
+            <strong style="color:#4f46e5; display:block; margin-top:10px;">— Ana Ribeiro</strong>
+         </div>
+
+         <div style="background:#f9fafb; padding:20px; border-radius:10px;">
+            <p style="color:#6b7280;">“Usei diversos apps, mas nenhum tem a simplicidade e eficiência do FinanSync.”</p>
+            <strong style="color:#4f46e5; display:block; margin-top:10px;">— Carlos Silva</strong>
+         </div>
+
+      </div>
+   </section>
+
+
+   <section id="faq" style="padding:60px 40px;">
+      <h2 style="text-align:center; font-size:2.2rem; color:#1f2937; margin-bottom:40px;">Perguntas Frequentes</h2>
+
+      <div style="max-width:900px; margin:auto; color:#6b7280; line-height:1.8;">
+         <p><strong style="color:#4f46e5;">• O sistema é gratuito?</strong><br>Sim, possui um plano gratuito com funções essenciais.</p>
+         <br>
+         <p><strong style="color:#4f46e5;">• Posso acessar pelo celular?</strong><br>Sim, o sistema é 100% responsivo.</p>
+         <br>
+         <p><strong style="color:#4f46e5;">• Meus dados estão seguros?</strong><br>Sim, utilizamos criptografia e padrões modernos de segurança.</p>
+      </div>
+   </section>
+
+
+   <section id="contato" style="padding:60px 40px; background:#fff;">
+      <h2 style="text-align:center; font-size:2.2rem; margin-bottom:30px; color:#1f2937;">Entre em Contato</h2>
+
+      <p style="text-align:center; color:#6b7280; margin-bottom:20px;">Dúvidas, sugestões ou suporte?</p>
+
+      <form style="max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px;">
+         <input type="text" placeholder="Seu nome" style="padding:12px; border-radius:8px; border:1px solid #ddd;">
+         <input type="email" placeholder="Email" style="padding:12px; border-radius:8px; border:1px solid #ddd;">
+         <textarea rows="4" placeholder="Mensagem" style="padding:12px; border-radius:8px; border:1px solid #ddd;"></textarea>
+         <button class="btn-primary" type="submit" style="border:none; cursor:pointer;">Enviar</button>
+      </form>
+   </section>
+
+
+   <footer>
+      © 2025 FinanSync. Todos os direitos reservados.
+   </footer>
+
+   <script>
+      function openMenu() {
+         document.getElementById("mobileMenu").classList.add("active");
+      }
+
+      function closeMenu() {
+         document.getElementById("mobileMenu").classList.remove("active");
+      }
+   </script>
+
+</body>
+</html>

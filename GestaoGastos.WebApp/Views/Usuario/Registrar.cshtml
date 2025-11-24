@@ -1,0 +1,96 @@
+﻿@{
+   Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Cadastro - Controle de Gastos</title>
+   <style>
+      :root {
+         --primary: #4f46e5;
+         --secondary: #4338ca;
+         --bg: #f9fafb;
+         --text-dark: #1f2937;
+         --text-light: #6b7280;
+      }
+
+      body {
+         background: var(--bg);
+         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         margin: 0;
+      }
+
+      .card {
+         background: #fff;
+         padding: 40px;
+         border-radius: 14px;
+         width: 100%;
+         max-width: 460px;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+         text-align: center;
+      }
+
+      h2 {
+         color: var(--primary);
+         margin-bottom: 20px;
+         font-size: 1.8rem;
+      }
+
+      input {
+         width: 100%;
+         padding: 12px;
+         margin: 10px 0;
+         border-radius: 8px;
+         border: 1px solid #ccc;
+      }
+
+      .btn-primary {
+         background: var(--primary);
+         border: none;
+         padding: 12px;
+         width: 100%;
+         color: white;
+         border-radius: 8px;
+         cursor: pointer;
+         font-size: 1rem;
+         transition: 0.3s;
+         margin-top: 10px;
+      }
+
+         .btn-primary:hover {
+            background: var(--secondary);
+         }
+
+      a {
+         text-decoration: none;
+         color: var(--primary);
+         font-size: 0.9rem;
+      }
+
+         a:hover {
+            opacity: 0.7;
+         }
+   </style>
+</head>
+<body>
+   <div class="card">
+      <h2>Criar Conta</h2>
+      <input type="text" placeholder="Nome completo" />
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Senha" />
+      <input type="password" placeholder="Confirmar senha" />
+      <button class="btn-primary">Cadastrar</button>
+      <p style="margin-top: 14px;">Já tem conta? <a asp-controller="Usuario" asp-action="Login">Entrar</a></p>
+      <p style="margin-top: 10px;">
+         <a asp-controller="Home" asp-action="Index">⬅ Voltar para a página inicial</a>
+      </p>
+   </div>
+</body>
+</html>
