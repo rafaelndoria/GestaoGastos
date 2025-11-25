@@ -1,4 +1,5 @@
-﻿using GestaoGastos.Domain.Enums;
+using GestaoGastos.Domain.Enums;
+
 using System.Text.RegularExpressions;
 
 namespace GestaoGastos.Domain.Entities
@@ -7,15 +8,29 @@ namespace GestaoGastos.Domain.Entities
     {
         public Usuario(string nome, string email, string senhaHash, ERole role)
         {
+            Validar(nome, email, senhaHash);
             Nome = nome;
             Email = email;
             SenhaHash = senhaHash;
             Role = role;
 
-            Validar(nome, email, senhaHash);
+            DataCriacao = DateTime.UtcNow;
+            Ativo = true;
+            Id = Guid.NewGuid();
+        }
+
+        public Usuario(string nome, string email, string senhaHash, ERole role, Guid id)
+        {
+            Nome = nome;
+            Email = email;
+            SenhaHash = senhaHash;
+            Role = role;
+            Id = id;
+
             DataCriacao = DateTime.UtcNow;
             Ativo = true;
         }
+
 
         public string Nome { get; private set; }
         public string Email { get; private set; }
@@ -54,7 +69,7 @@ namespace GestaoGastos.Domain.Entities
             if (string.IsNullOrWhiteSpace(email))
                 throw new Exception("O email não pode ser vazio.");
             if (!EmailValido(email))
-                throw new   Exception("O email informado é inválido.");
+                throw new Exception("O email informado é inválido.");
 
             if (string.IsNullOrWhiteSpace(senha))
                 throw new Exception("A senha não pode ser vazia.");

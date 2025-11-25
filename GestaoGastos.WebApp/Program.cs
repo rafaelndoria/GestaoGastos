@@ -1,4 +1,9 @@
+using GestaoGastos.Infra.IoC;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+InjecaoDependencia.AddInfra(builder.Services, builder.Configuration);
 
 builder.Services.AddControllersWithViews();
 
