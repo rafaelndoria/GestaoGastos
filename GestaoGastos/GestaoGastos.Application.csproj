@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GestaoGastos.Infra.IoC\GestaoGastos.Infra.IoC.csproj" />
+  </ItemGroup>
+
 </Project>
