@@ -10,8 +10,4 @@
     <EditorConfigFiles Remove="C:\Users\Rafael Doria\Desktop\Estudo\GestaoGastos\GestaoGastos.Domain\.editorconfig" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="C:\Users\Rafael Doria\Desktop\Estudo\GestaoGastos\GestaoGastos.Domain\.editorconfig" />
-  </ItemGroup>
-
 </Project>

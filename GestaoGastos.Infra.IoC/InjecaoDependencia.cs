@@ -1,4 +1,8 @@
+using GestaoGastos.Application.Services.Implementations;
+using GestaoGastos.Application.Services.Interfaces;
+using GestaoGastos.Domain;
 using GestaoGastos.Infra.Context;
+using GestaoGastos.Infra.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +17,10 @@ namespace GestaoGastos.Infra.IoC
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+            services.AddScoped<IAutenticacaoService, AutenticacaoService>();
 
             return services;
         }

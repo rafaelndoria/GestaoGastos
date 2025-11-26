@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoGastos.Application", "GestaoGastos\GestaoGastos.Application.csproj", "{848352C4-9888-4204-8722-3280E5375886}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoGastos.Domain", "GestaoGastos.Domain\GestaoGastos.Domain.csproj", "{2BCBD37D-8FE2-49EE-96D7-4F3B345ADF69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoGastos.Infra", "GestaoGastos.Infrastructure\GestaoGastos.Infra.csproj", "{0E56174D-7304-482A-8E24-4200E715E45D}"
@@ -13,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoGastos.WebApp", "Gest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoGastos.Infra.IoC", "GestaoGastos.Infra.IoC\GestaoGastos.Infra.IoC.csproj", "{3B098CA4-0836-4A3E-996B-54EAA6CF2B62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoGastos.Application", "GestaoGastos.Application\GestaoGastos.Application.csproj", "{7A7EDC3A-FDE2-49CA-8355-4D220894AE1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{848352C4-9888-4204-8722-3280E5375886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{848352C4-9888-4204-8722-3280E5375886}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{848352C4-9888-4204-8722-3280E5375886}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{848352C4-9888-4204-8722-3280E5375886}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2BCBD37D-8FE2-49EE-96D7-4F3B345ADF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2BCBD37D-8FE2-49EE-96D7-4F3B345ADF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BCBD37D-8FE2-49EE-96D7-4F3B345ADF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{3B098CA4-0836-4A3E-996B-54EAA6CF2B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B098CA4-0836-4A3E-996B-54EAA6CF2B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B098CA4-0836-4A3E-996B-54EAA6CF2B62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A7EDC3A-FDE2-49CA-8355-4D220894AE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A7EDC3A-FDE2-49CA-8355-4D220894AE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A7EDC3A-FDE2-49CA-8355-4D220894AE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A7EDC3A-FDE2-49CA-8355-4D220894AE1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
