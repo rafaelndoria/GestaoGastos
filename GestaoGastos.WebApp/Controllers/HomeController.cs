@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoGastos.WebApp.Controllers
@@ -16,6 +17,7 @@ namespace GestaoGastos.WebApp.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();

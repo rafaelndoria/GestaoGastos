@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GestaoGastos.Application\GestaoGastos.Application.csproj" />
     <ProjectReference Include="..\GestaoGastos.Infra.IoC\GestaoGastos.Infra.IoC.csproj" />
   </ItemGroup>
 

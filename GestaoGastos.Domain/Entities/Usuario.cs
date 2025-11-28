@@ -75,8 +75,6 @@ namespace GestaoGastos.Domain.Entities
                 throw new Exception("A senha não pode ser vazia.");
             if (senha.Length < 6)
                 throw new Exception("A senha deve possuir no mínimo 6 caracteres.");
-            if (!SenhaForte(senha))
-                throw new Exception("A senha deve conter letra maiúscula, minúscula, número e caractere especial.");
         }
 
         private bool EmailValido(string email)
@@ -84,16 +82,6 @@ namespace GestaoGastos.Domain.Entities
             return Regex.IsMatch(email,
                 @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
                 RegexOptions.IgnoreCase);
-        }
-
-        private bool SenhaForte(string senha)
-        {
-            bool temMaiuscula = senha.Any(char.IsUpper);
-            bool temMinuscula = senha.Any(char.IsLower);
-            bool temNumero = senha.Any(char.IsDigit);
-            bool temEspecial = senha.Any(ch => !char.IsLetterOrDigit(ch));
-
-            return temMaiuscula && temMinuscula && temNumero && temEspecial;
         }
     }
 }

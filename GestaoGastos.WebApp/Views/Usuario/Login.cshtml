@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LoginUsuarioInputModel
+@{
    Layout = null;
 }
 
@@ -8,6 +9,7 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <title>Login - Controle de Gastos</title>
+
    <style>
       :root {
          --primary: #4f46e5;
@@ -51,6 +53,15 @@
          border: 1px solid #ccc;
       }
 
+      .text-danger {
+         color: red;
+         font-size: 0.8rem;
+         display: block;
+         margin-top: -6px;
+         margin-bottom: 6px;
+         text-align: left;
+      }
+
       .btn-primary {
          background: var(--primary);
          border: none;
@@ -79,23 +90,33 @@
          }
    </style>
 </head>
+
 <body>
    <div class="card">
       <h2>Entrar no sistema</h2>
 
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Senha" />
+      <form asp-controller="Usuario" asp-action="Login" method="post">
 
-      <button class="btn-primary">Entrar</button>
+         <input asp-for="Email" placeholder="Email" />
+         <span asp-validation-for="Email" class="text-danger"></span>
 
-      <p style="margin-top: 14px;">
-         Não tem conta?
-         <a asp-controller="Usuario" asp-action="Registrar">Criar conta</a>
-      </p>
+         <input asp-for="Senha" type="password" placeholder="Senha" />
+         <span asp-validation-for="Senha" class="text-danger"></span>
 
-      <p style="margin-top: 10px;">
-         <a asp-controller="Home" asp-action="Inicio">⬅ Voltar para a página inicial</a>
-      </p>
+         <button class="btn-primary">Entrar</button>
+
+         <p style="margin-top: 14px;">
+            Não tem conta?
+            <a asp-controller="Usuario" asp-action="Registrar">Criar conta</a>
+         </p>
+
+         <p style="margin-top: 10px;">
+            <a asp-controller="Home" asp-action="Inicio">⬅ Voltar para a página inicial</a>
+         </p>
+      </form>
    </div>
+
+   @await Html.PartialAsync("_ValidationScriptsPartial")
+
 </body>
 </html>

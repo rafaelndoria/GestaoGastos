@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CadastroUsuarioInputModel
+@{
    Layout = null;
 }
 
@@ -82,15 +83,28 @@
 <body>
    <div class="card">
       <h2>Criar Conta</h2>
-      <input type="text" placeholder="Nome completo" />
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Senha" />
-      <input type="password" placeholder="Confirmar senha" />
-      <button class="btn-primary">Cadastrar</button>
-      <p style="margin-top: 14px;">Já tem conta? <a asp-controller="Usuario" asp-action="Login">Entrar</a></p>
-      <p style="margin-top: 10px;">
-         <a asp-controller="Home" asp-action="Inicio">⬅ Voltar para a página inicial</a>
-      </p>
+      <form asp-controller="Usuario" asp-action="Registrar" method="post">
+         <input asp-for="Nome" placeholder="Nome completo" />
+         <span asp-validation-for="Nome" class="text-danger"></span>
+
+         <input asp-for="Email" placeholder="Email" />
+         <span asp-validation-for="Email" class="text-danger"></span>
+
+         <input asp-for="Senha" type="password" placeholder="Senha" />
+         <span asp-validation-for="Senha" class="text-danger"></span>
+
+         <input asp-for="ConfirmarSenha" type="password" placeholder="Confirmar senha" />
+         <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+
+         <button class="btn-primary">Cadastrar</button>
+         <p style="margin-top: 14px;">Já tem conta? <a asp-controller="Usuario" asp-action="Login">Entrar</a></p>
+         <p style="margin-top: 10px;">
+            <a asp-controller="Home" asp-action="Inicio">⬅ Voltar para a página inicial</a>
+         </p>
+      </form>
    </div>
+
+   @await Html.PartialAsync("_ValidationScriptsPartial")
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 using GestaoGastos.Application.Services.Implementations;
 using GestaoGastos.Application.Services.Interfaces;
-using GestaoGastos.Domain;
+using GestaoGastos.Domain.Interfaces;
 using GestaoGastos.Infra.Context;
 using GestaoGastos.Infra.Repositories;
 
@@ -21,6 +21,7 @@ namespace GestaoGastos.Infra.IoC
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             return services;
         }

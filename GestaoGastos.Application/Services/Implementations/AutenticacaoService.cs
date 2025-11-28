@@ -34,7 +34,7 @@ namespace GestaoGastos.Application.Services.Implementations
             }
         }
 
-        public string GerarJwtToken(string email, string nomeUsuario, string nivel, int usuarioId)
+        public string GerarJwtToken(string email, string nomeUsuario, string nivel, Guid usuarioId)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var issuer = _configuration["Jwt:Issuer"];
