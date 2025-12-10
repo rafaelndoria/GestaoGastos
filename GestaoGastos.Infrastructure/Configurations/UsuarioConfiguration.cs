@@ -36,8 +36,7 @@ namespace GestaoGastos.Infra.Configurations
                 new Usuario("admin",
                             "admin@gmail.com",
                             "b8b8eb83374c0bf3b1c3224159f6119dbfff1b7ed6dfecdd80d4e8a895790a34",
-                            Domain.Enums.ERole.Admin,
-                            Guid.NewGuid()));
+                            Domain.Enums.ERole.Admin));
         }
     }
 }

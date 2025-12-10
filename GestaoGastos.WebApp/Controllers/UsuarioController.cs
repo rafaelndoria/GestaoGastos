@@ -3,8 +3,6 @@ using GestaoGastos.Application.Services.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
 
-using System.Threading.Tasks;
-
 namespace GestaoGastos.WebApp.Controllers
 {
     public class UsuarioController : Controller
