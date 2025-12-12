@@ -1,5 +1,4 @@
 using GestaoGastos.Domain.Core;
-using GestaoGastos.Domain.Enums;
 
 namespace GestaoGastos.Domain.Entities
 {
@@ -7,24 +6,22 @@ namespace GestaoGastos.Domain.Entities
     {
         protected Categoria() { }
 
-        public Categoria(string nome, string icone, string cor, ETipoCategoria tipoCategoria, Guid? usuarioId = null)
+        public Categoria(string nome, string icone, string cor, Guid? usuarioId = null)
         {
             Validar(nome, icone, cor);
 
             Nome = nome;
             Icone = icone;
             Cor = cor;
-            TipoCategoria = tipoCategoria;
             UsuarioId = usuarioId;
 
             Ativo = true;
-            PadraoSistema = usuarioId == null;
+            PadraoSistema = !usuarioId.HasValue;
         }
 
         public string Nome { get; private set; }
         public string Icone { get; private set; }
         public string Cor { get; private set; }
-        public ETipoCategoria TipoCategoria { get; private set; }
         public bool Ativo { get; private set; }
         public bool PadraoSistema { get; private set; }
 
@@ -39,14 +36,13 @@ namespace GestaoGastos.Domain.Entities
             PadraoSistema = false;
         }
 
-        public void Atualizar(string nome, string icone, string cor, ETipoCategoria tipo)
+        public void Atualizar(string nome, string icone, string cor)
         {
             Validar(nome, icone, cor);
 
             Nome = nome;
             Icone = icone;
             Cor = cor;
-            TipoCategoria = tipo;
         }
 
         public void Ativar() => Ativo = true;
@@ -55,10 +51,13 @@ namespace GestaoGastos.Domain.Entities
         private void Validar(string nome, string icone, string cor)
         {
             if (string.IsNullOrWhiteSpace(nome))
-                throw new Exception("Nome é obrigatório.");
+                throw new DomainException("Nome é obrigatório.");
 
             if (string.IsNullOrWhiteSpace(cor))
-                throw new Exception("Cor é obrigatória.");
+                throw new DomainException("Cor é obrigatória.");
+
+            if (string.IsNullOrWhiteSpace(icone))
+                throw new DomainException("Ícone é obrigatório.");
         }
     }
 }

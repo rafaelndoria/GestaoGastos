@@ -1,5 +1,4 @@
-﻿
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
@@ -14,6 +13,32 @@
           html: '@Html.Raw(ViewData.ModelState[""].Errors[0].ErrorMessage)',
           showConfirmButton: true,
           timer: 5000
+      });
+   </script>
+}
+
+@if (TempData["Erro"] != null)
+{
+   <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Atenção',
+          html: '@TempData["Erro"]',
+          showConfirmButton: true,
+          timer: 5000
+      });
+   </script>
+}
+
+@if (TempData["Sucesso"] != null)
+{
+   <script>
+      Swal.fire({
+          icon: 'success',
+          title: 'Sucesso',
+          html: '@TempData["Sucesso"]',
+          showConfirmButton: true,
+          timer: 3000
       });
    </script>
 }

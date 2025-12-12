@@ -19,9 +19,11 @@ namespace GestaoGastos.Infra.IoC
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
 
             return services;
         }

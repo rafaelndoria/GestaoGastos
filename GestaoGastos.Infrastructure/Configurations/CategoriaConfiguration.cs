@@ -23,10 +23,6 @@ namespace GestaoGastos.Infra.Configurations
                 .IsRequired()
                 .HasMaxLength(20);
 
-            builder.Property(x => x.TipoCategoria)
-                .IsRequired()
-                .HasConversion<int>();
-
             builder.Property(x => x.Ativo)
                 .IsRequired();
 

@@ -171,7 +171,7 @@
       <div class="menu">
          <a asp-controller="Dashboard" asp-action="Index">📊 Dashboard</a>
          <a asp-controller="Transacao" asp-action="Index">💵 Transações</a>
-         <a asp-controller="Categoria" asp-action="Index">🏷️ Categorias</a>
+         <a asp-controller="Categoria" asp-action="Criar">🏷️ Categorias</a>
          <a asp-controller="Meta" asp-action="Index">🎯 Metas</a>
          <a asp-controller="Relatorio" asp-action="Index">📄 Relatórios</a>
          <a asp-controller="Usuario" asp-action="Perfil">👤 Perfil</a>
@@ -214,7 +214,9 @@
    </script>
 
    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="https://kit.fontawesome.com/6c33e49b8c.js" crossorigin="anonymous"></script>
 
    @await RenderSectionAsync("Scripts", required: false)
+   @await Html.PartialAsync("_ValidationScriptsPartial")
 </body>
 </html>

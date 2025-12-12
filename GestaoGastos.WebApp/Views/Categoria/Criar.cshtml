@@ -1,0 +1,212 @@
+﻿@model GestaoGastos.Application.InputModels.CadastroCategoriaInputModel
+
+@{
+   ViewData["Title"] = "Categorias";
+}
+
+<div class="container">
+
+   <div class="card shadow-sm mb-4" style="border-radius: 12px;">
+      <div class="card-body">
+
+         <h4 class="mb-3">Cadastrar</h4>
+
+         <form asp-action="Salvar" method="post" id="categoriaForm">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row g-3">
+
+               <div class="col-md-6">
+                  <label class="form-label">Nome</label>
+                  <input asp-for="Nome" class="form-control" placeholder="Ex: Alimentação" />
+                  <span asp-validation-for="Nome" class="text-danger"></span>
+               </div>
+
+               <div class="col-md-3">
+                  <label class="form-label">Cor</label>
+                  <input asp-for="Cor" type="color" class="form-control form-control-color" />
+                  <span asp-validation-for="Cor" class="text-danger"></span>
+               </div>
+
+               <div class="col-12">
+                  <label class="form-label">Ícone</label>
+
+                  <div class="icon-picker border rounded p-3" style="max-height: 180px; overflow-y:auto;">
+                     <div class="row row-cols-6 g-3">
+
+                        @foreach (var icon in Model.IconesDisponiveis ?? new string[] { })
+                        {
+                           <div class="col text-center">
+                              <div class="icon-option p-2 border rounded icon-select"
+                                   data-value="@icon"
+                                   role="button" tabindex="0"
+                                   style="cursor:pointer;">
+                                 <i class="fa-solid @icon"></i>
+                              </div>
+                           </div>
+                        }
+
+                     </div>
+                  </div>
+
+                  <input asp-for="Icone" class="offscreen" />
+                  <span asp-validation-for="Icone" class="text-danger"></span>
+               </div>
+
+            </div>
+
+            <div class="mt-4">
+               <button class="btn-acao" type="submit">
+                  <i class="fa-solid fa-save"></i>
+                  Salvar
+               </button>
+            </div>
+
+         </form>
+      </div>
+   </div>
+
+
+   <div class="card shadow-sm" style="border-radius: 12px;">
+      <div class="card-body">
+
+         <h4 class="mb-3">Categorias</h4>
+
+         <div class="list-group">
+
+            @foreach (var c in Model.Categorias ?? Enumerable.Empty<GestaoGastos.Application.ViewModels.CategoriaViewModel>())
+            {
+               <div class="list-group-item mb-2"
+                    style="border: 2px solid @c.Cor; border-radius: 12px;">
+
+                  <div class="d-flex align-items-center">
+
+                     <div class="categoria-icone" style="background:@c.Cor;">
+                        <i class="fa-solid @c.Icone" aria-hidden="true"></i>
+                     </div>
+
+                     <div class="ms-3 flex-grow-1">
+                        <strong style="font-size: 1.1rem;">@c.Nome</strong>
+                     </div>
+
+                     <button class="btn btn-sm btn-primary me-2"
+                             type="button"
+                             onclick="editarCategoria('@c.Id','@c.Nome','@c.Icone','@c.Cor')">
+                        Editar
+                     </button>
+
+                     <form method="post" asp-controller="Categoria" asp-action="AlterarStatus" asp-route-id="@c.Id" class="m-0 p-0 d-inline">
+                        @Html.AntiForgeryToken()
+                        @if (c.Ativo)
+                        {
+                           <button type="submit" class="btn btn-sm btn-danger">
+                              Inativar
+                           </button>
+                        }
+                        else
+                        {
+                           <button type="submit" class="btn btn-sm btn-success">
+                              Ativar
+                           </button>
+                        }
+                     </form>
+
+                  </div>
+
+               </div>
+            }
+
+         </div>
+
+      </div>
+   </div>
+
+</div>
+
+
+<style>
+   .offscreen {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+   }
+
+   .categoria-icone {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+   }
+
+   .btn-acao {
+      background-color: #007bff !important;
+      border: none !important;
+      color: white !important;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+   }
+
+      .btn-acao i {
+         font-size: 14px;
+      }
+
+   .icon-option.selected {
+      background: rgba(13,110,253,0.08);
+      border-color: #0d6efd !important;
+   }
+</style>
+
+@section Scripts {
+
+   <script>
+      const iconBoxes = document.querySelectorAll(".icon-select");
+      const iconInput = document.querySelector("input[name='Icone']");
+
+      iconBoxes.forEach(box => {
+          box.addEventListener("click", () => {
+              iconBoxes.forEach(b => b.classList.remove("selected"));
+              box.classList.add("selected");
+
+              iconInput.value = box.dataset.value;
+          });
+
+          box.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  box.click();
+              }
+          });
+      });
+
+      function editarCategoria(id, nome, icone, cor) {
+
+          document.getElementById("categoriaForm").reset();
+
+          document.querySelector("input[name='Id']").value = id;
+          document.querySelector("input[name='Nome']").value = nome;
+          document.querySelector("input[name='Cor']").value = cor;
+
+          iconInput.value = icone;
+
+          iconBoxes.forEach(b => {
+              b.classList.remove("selected");
+              if (b.dataset.value === icone)
+                  b.classList.add("selected");
+          });
+
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+   </script>
+}
