@@ -19,6 +19,9 @@ namespace GestaoGastos.WebApp.Controllers
             if (mensagemAcessoNegado != null)
                 ModelState.AddModelError(string.Empty, mensagemAcessoNegado);
 
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             return View();
         }
 
@@ -65,6 +68,12 @@ namespace GestaoGastos.WebApp.Controllers
                 ModelState.AddModelError(string.Empty, "Não foi possivel cadastrar o usuário: " + ex.Message);
                 return View(inputModel);
             }
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("JWTToken");
+            return RedirectToAction("Login");
         }
 
         public IActionResult AcessoNegado(string codigoErro)
